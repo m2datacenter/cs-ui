@@ -14,7 +14,7 @@ You need to have [NodeJs](https://nodejs.org/en/) (>= 10.0.0) installed on your 
 
 CS-UI is available as an [npm package]
 
-**[Stable v4]**
+**[Stable v1.0.0]**
 ```sh
 // with npm
 npm install cs-ui

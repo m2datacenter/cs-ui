@@ -1,20 +1,30 @@
 import styled, { css } from 'styled-components';
 
 export const Label = styled.label`
-  background-color: inherit;
-
   ${(props) => (props.error
-    ? css`color: ${props.theme.input.assistiveText.errorColor};`
-    : css`color: ${props.theme.label.color};`)}
+    ? css`
+    color: ${props.theme.input.assistiveText.errorColor};`
+    : css`
+    color: ${props.theme.label.color};`
+  )}
+
+  ${(props) => (props.variant === 'filled'
+    ? css`background-color: ${props.theme.palette.default.light};`
+    : css`background-color: ${props.theme.html.backGroundColor};`
+  )}
 
   font-size: ${(props) => props.theme.label.size};
+  position: absolute;
 
   ${(props) => ['outlined', 'filled'].includes(props.variant) && css`
     left: 5px;
   `}
 
-  position: absolute;
-  transform-origin: 0 0;
+  ${(props) => props.variant === 'outlined' && css`padding: 0px 5px;`}
+
+  top: 50%;
+  transform: translateY(-50%);
+  transform-origin: top left;
   transition: all 0.2s ease;
 `;
 
@@ -57,11 +67,20 @@ export const Container = styled.div`
   &:hover {
     ${(props) => (props.error
     ? css`border-color: ${props.theme.input.assistiveText.errorColor};`
-    : css`border-color: ${props.theme.input.border.hoverColor};`)}
+    : css`border-color: ${props.theme.input.border.highlight};`)}
 
     ${Label} {
       font-weight: 500;
+      ${(props) => (props.error
+    ? css`color: ${props.theme.input.assistiveText.errorColor};`
+    : css`color: ${props.theme.label.highlight};`)}
     }
+  }
+
+  &:focus-within {
+    ${(props) => (props.error
+    ? css`border-color: ${props.theme.input.assistiveText.errorColor};`
+    : css`border-color: ${props.theme.input.border.highlight};`)}
   }
 `;
 
@@ -71,7 +90,7 @@ const baseCSS = css`
 
   ${(props) => (props.error
     ? css`color: ${props.theme.input.assistiveText.errorColor};`
-    : css`color: inherit;`)};
+    : css`color: ${props.theme.input.color};`)};
 
   ${(props) => css`font-size: ${props.theme.input.size}`};
 
@@ -87,60 +106,61 @@ const baseCSS = css`
   `}
 
   ${(props) => props.variant === 'outlined' && css`
-    padding-left: 5px;
+    padding: 5px;
   `}
 
   &:not(:placeholder-shown) {
     + label {
       ${(props) => props.variant === 'filled' && css`
-        transform: translateY(-1px) scale(0.75);
+        top: 0%;
+        transform: translateY(0) scale(0.9);
       `}
 
       ${(props) => props.variant === 'outlined' && css`
-        transform: translateY(-19px) scale(0.75);
+        top: 0%;
+        transform: scale(0.9) translateY(-50%);
       `}
 
       ${(props) => props.variant === 'standard' && css`
-        transform: translateY(-13px) scale(0.75);
+        top: 0%;
+        transform: translateY(-80%) scale(0.9);
       `}
     }
   }
 
   &:focus {
     + label {
-      ${(props) => (props.error
-    ? css`color: ${props.theme.input.assistiveText.errorColor};`
-    : css`color: ${props.theme.input.border.focusColor};`)};
-
+      ${(props) => (props.error ? css`color: ${props.theme.input.assistiveText.errorColor};` : css`color: ${props.theme.label.highlight};`)};
 
       ${(props) => props.variant === 'filled' && css`
-        transform: translateY(-1px) scale(0.75);
+        top: 0%;
+        transform: translateY(0) scale(0.9);
       `}
 
       ${(props) => props.variant === 'outlined' && css`
-        transform: translateY(-19px) scale(0.75);
+        top: 0%;
+        transform: scale(0.9) translateY(-50%);
       `}
 
       ${(props) => props.variant === 'standard' && css`
-        transform: translateY(-13px) scale(0.75);
+        top: 0%;
+        transform: translateY(-80%) scale(0.9);
       `}
 
       + span {
-        ${(props) => (props.variant === 'outlined'
-    ? css`transform: scaleX(0)`
-    : css`transform: scaleX(1)`)}
+        ${(props) => (props.variant === 'outlined' ? css`transform: scaleX(0)` : css`transform: scaleX(1)`)}
       }
     }
   }
+
+
 `;
 
 export const Input = styled.input`
   ${baseCSS}
 `;
 
-export const TextArea = styled.textarea.attrs({
-  rows: 3,
-})`
+export const TextArea = styled.textarea.attrs({ rows: 3 })`
   ${baseCSS}
   overflow: hidden;
   resize: none;
@@ -149,7 +169,7 @@ export const TextArea = styled.textarea.attrs({
 export const SpanBorder = styled.span`
   ${(props) => (props.error
     ? css`background-color: ${props.theme.input.assistiveText.errorColor};`
-    : css`background-color: ${props.theme.input.border.focusColor};`)};
+    : css`background-color: ${props.theme.input.border.highlight};`)};
 
   bottom: -1px;
   height: 2px;

@@ -14,11 +14,12 @@ function TextField({
   multiline, variant, label, helperText, margin, error, ...rest
 }) {
   return (
+
     <Container
       multiline={multiline}
       variant={variant}
       margin={margin}
-      extraMargin={helperText.length > 0}
+      extraMargin={helperText && helperText.length > 0}
       error={error}
     >
       {
@@ -49,7 +50,7 @@ function TextField({
       <SpanBorder variant={variant} error={error} />
 
       {
-        helperText.length > 0 && (
+        helperText && helperText.length > 0 && (
         <AssistiveText
           multiline={multiline}
           variant={variant}
@@ -60,6 +61,7 @@ function TextField({
         )
       }
     </Container>
+
   );
 }
 

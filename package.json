@@ -2,8 +2,10 @@
   "name": "cs-ui",
   "version": "1.0.0",
   "description": "Codesoluti React UI Components",
+  "author": "m2datacenter",
+  "license": "MIT",
+  "repository": "https://github.com/m2datacenter/cs-ui",
   "main": "dist/index.js",
-  "author": "M2 Data Center",
   "scripts": {
     "dev": "webpack --watch --mode=development",
     "deploy": "webpack --mode=production"
@@ -11,7 +13,6 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.0",
@@ -31,5 +32,8 @@
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "styled-components": "^5.1.0"
-  }
+  },
+  "files": [
+    "dist"
+  ]
 }

@@ -2,7 +2,7 @@ export const COLORS = {
   default: {
     dark: '#0E0E0F',
     light: '#E2E2E2',
-    main: '#282B28',
+    main: '#5c677d',
   },
   error: {
     dark: '#d32f2f',
@@ -36,9 +36,18 @@ export const COLORS = {
   },
 };
 
-function createTheme(colors = COLORS) {
+export const HTML = {
+  backGroundColor: '#ffffff',
+};
+
+function createTheme({ colors = COLORS, html = HTML }) {
   return {
+    palette: colors,
+    html: {
+      backGroundColor: html.backGroundColor,
+    },
     input: {
+      color: colors.default.main,
       assistiveText: {
         errorColor: colors.error.dark,
         infoColor: colors.info.dark,
@@ -46,17 +55,15 @@ function createTheme(colors = COLORS) {
       },
       border: {
         color: 'rgba(0,0,0,0.1)',
-        focusColor: colors.primary.dark,
-        hoverColor: 'rgba(0,0,0,0.5)',
+        highlight: colors.primary.dark,
       },
       size: '16px',
     },
     label: {
       color: colors.default.main,
-      hover: colors.primary.dark,
+      highlight: colors.primary.dark,
       size: '14px',
     },
-    palette: colors,
   };
 }
 
